@@ -1,3 +1,5 @@
+import { defineNuxtConfig } from "nuxt/config"
+
 const repositoryName = 'poc_nuxt_cms_static'
 const baseURL = process.env.NUXT_APP_BASE_URL || '/'
 const siteUrl = process.env.NUXT_PUBLIC_SITE_URL || `https://example.github.io/${repositoryName}`
