@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Capa abstrata de CMS em Git</title>
+  <desc id="desc">Formas geométricas representando edição de conteúdo em um repositório Git.</desc>
+  <rect width="1200" height="675" fill="#f7f5ef"/>
+  <rect x="115" y="105" width="970" height="465" rx="22" fill="#ffffff" stroke="#ded8cb" stroke-width="5"/>
+  <rect x="170" y="165" width="260" height="345" rx="14" fill="#1f2933"/>
+  <rect x="485" y="168" width="430" height="32" rx="8" fill="#0f766e"/>
+  <rect x="485" y="242" width="545" height="24" rx="7" fill="#ded8cb"/>
+  <rect x="485" y="296" width="470" height="24" rx="7" fill="#ded8cb"/>
+  <rect x="485" y="350" width="520" height="24" rx="7" fill="#ded8cb"/>
+  <rect x="485" y="425" width="170" height="48" rx="10" fill="#d97706"/>
+  <circle cx="300" cy="260" r="54" fill="#f7f5ef"/>
+  <path d="M252 384h96l-48-84-48 84Z" fill="#b9e4dd"/>
+</svg>

@@ -1,0 +1,62 @@
+media:
+  - name: images
+    label: Imagens
+    input: public/images
+    output: /images
+    categories: [image]
+    extensions: [png, jpg, jpeg, webp, svg]
+    rename: safe
+
+content:
+  - name: blog
+    label: Blog
+    type: collection
+    path: content/blog
+    format: yaml-frontmatter
+    filename:
+      template: "{fields.slug}.md"
+      field: create
+    view:
+      primary: title
+      sort: date
+      order: desc
+      fields: [title, date, draft]
+    fields:
+      - name: title
+        label: Título
+        type: string
+        required: true
+      - name: description
+        label: Descrição
+        type: text
+        required: true
+      - name: date
+        label: Data
+        type: date
+        required: true
+      - name: cover
+        label: Capa
+        type: image
+        options:
+          media: images
+      - name: tags
+        label: Tags
+        type: string
+        list: true
+      - name: draft
+        label: Rascunho
+        type: boolean
+        default: false
+      - name: slug
+        label: Slug
+        type: string
+        required: true
+      - name: body
+        label: Conteúdo
+        type: rich-text
+        options:
+          format: markdown
+          media: images
+          path: public/images
+          rename: safe
+          switcher: true

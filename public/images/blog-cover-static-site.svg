@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Capa abstrata de site estático</title>
+  <desc id="desc">Formas geométricas representando arquivos Markdown e páginas publicadas.</desc>
+  <rect width="1200" height="675" fill="#fffdf8"/>
+  <rect x="90" y="80" width="420" height="515" rx="18" fill="#0f766e"/>
+  <rect x="140" y="150" width="310" height="34" rx="8" fill="#f7f5ef"/>
+  <rect x="140" y="220" width="250" height="22" rx="6" fill="#b9e4dd"/>
+  <rect x="140" y="266" width="300" height="22" rx="6" fill="#b9e4dd"/>
+  <rect x="140" y="312" width="210" height="22" rx="6" fill="#b9e4dd"/>
+  <rect x="610" y="122" width="470" height="355" rx="18" fill="#1f2933"/>
+  <rect x="660" y="178" width="250" height="28" rx="7" fill="#f7f5ef"/>
+  <rect x="660" y="245" width="340" height="18" rx="5" fill="#ded8cb"/>
+  <rect x="660" y="285" width="290" height="18" rx="5" fill="#ded8cb"/>
+  <rect x="660" y="325" width="360" height="18" rx="5" fill="#ded8cb"/>
+  <circle cx="998" cy="505" r="86" fill="#d97706"/>
+  <path d="M578 516h-96l48-84 48 84Z" fill="#0f766e"/>
+</svg>
