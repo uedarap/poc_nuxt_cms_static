@@ -572,7 +572,7 @@
                     Fique por <span>Dentro</span>
                 </h2>
             </div>
-            <div class="carousel-wrap ">
+            <div class="carousel-wrap">
                 <div class="owl-carousel client_owl-carousel">
                     <div v-for="post in posts" :key="post.id" class="item">
                         <div class="box">
@@ -776,7 +776,7 @@ import LGPD from '@/components/LGPD.vue';
 import Carousel from '@/components/Carousel.vue';
 import linkedinPosts from "@/assets/linkedin_posts.json";
 import modulesJson from "@/assets/modules.json";
-import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { computed, nextTick, onMounted, onUnmounted, ref } from 'vue';
 
 const posts = ref(<any>[]);
 const isScrolled = ref(false);
@@ -948,9 +948,45 @@ const slides = [
     },
 ];
 
-onMounted(() => {
+const initLinkedInCarousel = () => {
+    const jquery = (window as any).jQuery || (window as any).$;
+    const carousel = jquery?.('.client_owl-carousel');
+
+    if (!carousel?.length || !jquery.fn?.owlCarousel) return;
+
+    if (carousel.hasClass('owl-loaded')) {
+        carousel.trigger('destroy.owl.carousel');
+        carousel.removeClass('owl-loaded owl-hidden');
+        carousel.find('.owl-stage-outer').children().unwrap();
+    }
+
+    carousel.owlCarousel({
+        loop: true,
+        margin: 20,
+        nav: false,
+        dots: true,
+        autoplay: true,
+        autoplayTimeout: 5000,
+        autoplayHoverPause: true,
+        responsive: {
+            0: {
+                items: 1,
+            },
+            768: {
+                items: 2,
+            },
+            1000: {
+                items: 3,
+            },
+        },
+    });
+};
+
+onMounted(async () => {
     try {
         posts.value = linkedinPosts.data;
+        await nextTick();
+        initLinkedInCarousel();
         window.addEventListener('scroll', handleScroll);
         handleScroll(); // Atualizar na montagem inicial
     } catch (e) {
@@ -973,6 +1009,13 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
+    const jquery = (window as any).jQuery || (window as any).$;
+    const carousel = jquery?.('.client_owl-carousel');
+
+    if (carousel?.hasClass('owl-loaded')) {
+        carousel.trigger('destroy.owl.carousel');
+    }
+
     window.removeEventListener('scroll', handleScroll);
 });
 
