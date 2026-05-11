@@ -26,18 +26,18 @@ export default defineNuxtConfig({
     }
   },
   css: ['~/assets/css/main.css'],
-  nitro: {
-    preset: 'github_pages',
-    prerender: {
-      crawlLinks: true,
-      routes: ['/', '/blog']
-    }
-  },
-  routeRules: {
-    '/': { prerender: true },
-    '/blog': { prerender: true },
-    '/blog/**': { prerender: true }
-  },
+  // nitro: {
+  //   preset: 'github_pages',
+  //   prerender: {
+  //     crawlLinks: true,
+  //     routes: ['/', '/blog']
+  //   }
+  // },
+  // routeRules: {
+  //   '/': { prerender: true },
+  //   '/blog': { prerender: true },
+  //   '/blog/**': { prerender: true }
+  // },
   typescript: {
     strict: true
   }

@@ -1,0 +1,112 @@
+[
+    {
+        "id": 1,
+        "name": "iPORTAL",
+        "title": "iPORTAL",
+        "sub": "Portal do cliente",
+        "description": "Centraliza solicitações, documentos e serviços, promovendo agilidade, transparência e comunicação direta entre recintos alfandegados e seus clientes. A solução simplifica os processos operacionais e melhora a experiência do usuário, permitindo o acompanhamento em tempo real de documentos e cargas, a interação com órgãos anuentes e uma comunicação rápida e eficiente entre todas as partes envolvidas.​<br><b><br>• Cadastros e configurações​ <br>• Acompanhamento de Carga​ <br>• Solicitação de Serviços​ <br>• Relatórios​ </b>",
+        "image_url": "",
+        "link": "",
+        "category": ["Terminal Portuário"]
+    },
+    {
+        "id": 2,
+        "name": "iAGE",
+        "title": "iAGE",
+        "sub": "Agendamento eletrônico de caminhões e cargas",
+        "description": "Gestão de agendamento de caminhões em recintos aduaneiros, desenvolvido para organizar e otimizar o fluxo de acesso dos veículos de carga. Controla janelas, cotas e integrações com NF-e, reduzindo filas e aumentando a previsibilidade operacional.<br/>Projetado para simplificar e acelerar todas as etapas do processo de agendamento, o iAGE proporciona maior controle aos terminais, melhor experiência aos transportadores e reforça a conformidade com órgãos reguladores.​<br><b><br>• Cadastros e configurações​ <br>• Gestão de Agendamentos <br>• Configurações de Agendamentos​ <br>• Relatórios e Dashboards</b>",
+        "image_url": "",
+        "link": "",
+        "category": ["Terminal Portuário", "CLIA/Porto Seco", "REDEX", "Armazém Geral", "Estação de Transbordo", "Agronegócio", "Químico", "Siderurgia e mineração", "Distribuição"]
+    },
+    {
+        "id": 3,
+        "name": "iGATE",
+        "title": "iGATE",
+        "sub": "Acesso automatizado de caminhões e cargas",
+        "description": "Controle de acesso de veículos de carga, desenvolvido para garantir segurança, fluidez e precisão nas operações de entrada e saída dos gates dos recintos. A solução permite a liberação de motoristas e veículos de forma automática através de integração nativa com equipamentos como OCRs, biometrias, balanças, cancelas entre outros. Com gestão simultânea de múltiplos gates e monitoramento em tempo real, o iGATE otimiza o fluxo operacional, reduz intervenções manuais e aumenta a confiabilidade dos processos e melhor experiência dos usuários.​ <br><b><br>• Cadastros e configurações​ <br>• Operações de Gate​ <br>• Equipamentos de controle de gate​ <br>• Módulo Recintos​</b>",
+        "image_url": "",
+        "link": "",
+        "category": ["Terminal Portuário", "CLIA/Porto Seco", "REDEX", "Armazém Geral", "Estação de Transbordo", "Agronegócio", "Químico", "Siderurgia e mineração", "Distribuição"]
+    },
+    {
+        "id": 4,
+        "name": "iCOA",
+        "title": "iCOA",
+        "sub": "Controle de acesso",
+        "description": "Ideal para pessoas e veículos leves, desenvolvido para garantir segurança, padronização e agilidade. A solução permite o registro e a liberação de acessos, com possibilidade de autoatendimento por meio de totens, reduzindo filas. Integrado a equipamentos controladores de acesso e tecnologias como QR Code e biometria, o iCOA proporciona monitoramento em tempo real, maior confiabilidade nos processos e uma experiência mais eficiente para usuários, além da emissão de relatórios detalhados para apoio à gestão.​<br><b><br>• Cadastros e configurações​ <br>• Liberação de acesso​ <br>• Controle de acesso​ <br>• Equipamentos de controle de acesso​ <br>• Relatórios e Dashboards</b>",
+        "image_url": "",
+        "link": "",
+        "category": ["Terminal Portuário", "CLIA/Porto Seco", "REDEX", "Armazém Geral", "Agronegócio", "Químico", "Siderurgia e mineração", "Distribuição"]
+    },
+    {
+        "id": 5,
+        "name": "iCARGA",
+        "title": "iCARGA",
+        "sub": "Gerenciamento interno do armazém e otimização de pátio",
+        "description": "WMS especializado no gerenciamento e controle de estoque, atuando desde a entrada, armazenagem e movimentação até a saída dos mais diversos tipos de carga. Desenvolvido para terminais portuários, Armazéns Gerais, CLIAs, REDEX, a solução atende operações de importação e exportação com eficiência e segurança.<br/>A plataforma integra processos operacionais, órgãos reguladores e gestão logística, oferecendo relatórios e dashboards para apoio à tomada de decisão. Garante maior controle, rastreabilidade e conectividade em toda a cadeia logística.<br><b><br>• Cadastros e configurações <br>• Armazenagem. <br>• Operações internas. <br>• Faturamento <br>• Relatórios e Dashboards </b>​",
+        "image_url": "",
+        "link": "",
+        "category": ["Terminal Portuário", "CLIA/Porto Seco", "REDEX", "Armazém Geral", "Estação de Transbordo", "Agronegócio", "Químico", "Siderurgia e mineração", "Distribuição"]
+    },
+    {
+        "id": 6,
+        "name": "iOPE",
+        "title": "iOPE",
+        "sub": "Gestão de armazém e estoque",
+        "description": "Módulo que centraliza o planejamento e a execução das operações portuárias, proporcionando maior controle, previsibilidade e eficiência operacional para o operador. A solução contempla o line-up das embarcações, a gestão de atracação e desatracação, permite o registro e controle de paralisações e oferece o monitoramento em tempo real das atividades de carga e descarga.<br/>Disponibiliza indicadores e informações consolidadas que apoiam a tomada de decisão e a otimização dos recursos portuários.​ <br><b><br>• Operações Portuárias</b>",
+        "image_url": "",
+        "link": "",
+        "category": ["Terminal Portuário", "Estação de Transbordo"]
+    },
+    {
+        "id": 7,
+        "name": "iFLOW",
+        "title": "iFLOW",
+        "sub": "Checklist, segurança, navios, equipamentos, OEA",
+        "description": "Criação e gestão de formulários e checklists personalizados, desenvolvido para atender recintos e operações diversas. A aplicação agiliza processos de inspeção, validação e controles operacionais e regulatórios, como os exigidos para OEA.<br/>Com foco na experiência do usuário, o iFLOW permite criar, preencher, acompanhar e analisar formulários. A plataforma centraliza informações e garante padronização, rastreabilidade e conformidade operacional.<br><b><br>• Cadastros e configurações​ <br>• Formulários​ <br>• Mobile​ <br>• Relatórios</b>",
+        "image_url": "",
+        "link": "",
+        "category": ["Terminal Portuário", "CLIA/Porto Seco", "REDEX", "Agronegócio", "Químico", "Siderurgia e mineração", "Distribuição"]
+    },
+    {
+        "id": 8,
+        "name": "iPUC",
+        "title": "iPUC",
+        "sub": "Integração do PUCOMEX",
+        "description": "Automatiza a comunicação entre os sistemas do terminal e o Portal Único do Comércio Exterior. Viabiliza o envio eletrônico das informações de carga ao chegar no recinto alfandegado. Integra os processos operacionais do terminal ao CCT, elimina controles paralelos e reduz intervenções manuais. O iPUC permite a integração automática dos dados e envio estruturado de listas de Notas Fiscais. Garante conformidade regulatória, rastreabilidade das informações e maior agilidade no fluxo aduaneiro.​​ <br.<b><br>• Cadastros e configurações​ <br>• PUCOMEX​ <br>• Relatórios e Dashboards</b>",
+        "image_url": "",
+        "link": "",
+        "category": ["Compliance Aduaneiro", "CLIA/Porto Seco", "Terminal Portuário", "REDEX", "Estação de Transbordo"]
+    },
+        {
+        "id": 9,
+        "name": "iCOMPLIANCE",
+        "title": "ISICA",
+        "sub": "Sistemas para atendimento às portarias da Receita Federal em recintos alfandegados",
+        "description": "Portal que integra o SICA do recinto aduaneiro ao Módulo Recintos do Portal Único SISCOMEX. Automatiza o registro e o envio dos eventos obrigatórios da API Recintos. Desenvolvido em conformidade com as Portarias vigentes, o iCOMPLIANCE assegura aderência regulatória e padronização das informações.<br/>Permite o monitoramento das operações em tempo real. Garante rastreabilidade, confiabilidade dos dados e maior controle sobre os processos aduaneiros, apoiando a gestão do recinto no cumprimento das exigências legais.​<br><b><br>• Cadastros e configurações​ <br>• API - Módulo Recintos​ <br>• Dashboards e Relatórios</b>",
+        "image_url": "",
+        "link": "",
+        "category": ["Compliance Aduaneiro", "CLIA/Porto Seco", "Terminal Portuário", "REDEX", "Estação de Transbordo"]
+    },
+    {
+        "id": 10,
+        "name": "iCOV",
+        "title": "iCOV",
+        "sub": "Central de operações e vigilância",
+        "description": "Desenvolvida para o monitoramento em tempo real do perímetro do recinto, por meio de câmeras fixas estrategicamente posicionadas. A solução garante maior segurança operacional, visibilidade contínua das áreas críticas e aderência às exigências regulatórias regionais.<br/>O iCOV permite o compartilhamento das imagens com a Alfândega local, promovendo transparência, conformidade e maior integração com os órgãos fiscalizadores.​ <br><b><br>• Georreferenciamento <br>• Visualização de imagens​ </b>",
+        "image_url": "",
+        "link": "",
+        "category": ["Compliance Aduaneiro", "REDEX"]
+    },
+    {
+        "id": 11,
+        "name": "iCONFERE",
+        "title": "iCONFERE",
+        "sub": "Conferência remota, RFB Web",
+        "description": "Centraliza o agendamento, a comunicação e a execução da conferência de cargas de forma totalmente remota, integrando terminais e Alfândega em um único fluxo. A solução registra todas as etapas do processo, garantindo rastreabilidade, transparência e segurança na operação.<br/>O iCONFERE gera e armazena evidências digitais do procedimento, permitindo a emissão do laudo oficial e assegurando conformidade regulatória e maior eficiência operacional.​ <br><b><br>• Cadastros e configurações​ <br>• Agendamento de conferências Remotas​ <br>• Conferência Remota - Web e Mobile​ <br>• Visualização e edição de laudos emitidos<b>.",
+        "image_url": "",
+        "link": "",
+        "category": ["Compliance Aduaneiro", "REDEX"]
+    }
+]

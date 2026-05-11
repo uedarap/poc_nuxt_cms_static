@@ -12,11 +12,15 @@
   "dependencies": {
     "@nuxt/content": "^3.13.0",
     "better-sqlite3": "^12.9.0",
+    "jquery": "^4.0.0",
     "nuxt": "^4.4.2",
+    "scss": "^0.2.4",
+    "swiper": "^12.1.4",
     "vue": "^3.5.0",
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
-    "@types/node": "^25.6.0"
+    "@types/node": "^25.6.0",
+    "sass-embedded": "^1.99.0"
   }
 }
