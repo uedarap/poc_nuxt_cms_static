@@ -1,9 +1,9 @@
 <template>
   <div class="site-shell">
-    <SiteHeader />
+    <!-- <SiteHeader /> -->
     <main>
       <NuxtPage />
     </main>
-    <SiteFooter />
+    <!-- <SiteFooter /> -->
   </div>
 </template>

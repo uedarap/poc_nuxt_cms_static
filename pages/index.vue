@@ -5,7 +5,7 @@
         <div class="hero_bg_box">
             <div class="bg_img_box" style="position: relative; overflow: hidden; width: 100%; height: 100%;">
                 <!-- Placeholder para a imagem -->
-                <img src="../../assets/img/bg_iport_video.png" alt="background" class="placeholder-image"
+                <img src="/images/bg_iport_video.png" alt="background" class="placeholder-image"
                     style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
 
                 <!-- Vídeo do Vimeo -->
@@ -16,7 +16,7 @@
                     title="iPort Landing" onload="hidePlaceholder()">
                 </iframe>
             </div>
-            <!-- <img src="../../assets/img/hero-bg-e.png" alt=""> -->
+            <!-- <img src="/images/hero-bg-e.png" alt=""> -->
         </div>
 
         <!-- header section strats -->
@@ -24,7 +24,7 @@
             <div class="container-fluid">
                 <nav class="navbar navbar-expand-lg custom_nav-container">
                     <a class="navbar-brand" href="#">
-                        <img src="../../assets/img/iport_logo_mono_nobg2.png" alt="" />
+                        <img src="/images/iport_logo_mono_nobg2.png" alt="" />
                     </a>
 
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -51,7 +51,7 @@
                                 <a class="nav-link" href="https://cubo.network/pt/comunidade-startups/iport"
                                     target="_blank">
                                     <img class="cubo" :class="[{ scrolled: isScrolled }]"
-                                        src="../../assets/img/cubo.svg" alt="itaú cubo" />
+                                        src="/images/cubo.svg" alt="itaú cubo" />
                                 </a>
                             </li>
                         </ul>
@@ -87,7 +87,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="img-box">
-                                        <!-- <img src="../../assets/img/navio.png" alt=""> -->
+                                        <!-- <img src="/images/navio.png" alt=""> -->
                                     </div>
                                 </div>
                             </div>
@@ -114,7 +114,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="img-box">
-                                        <!-- <img src="../../assets/img/ship.png" alt=""> -->
+                                        <!-- <img src="/images/ship.png" alt=""> -->
                                     </div>
                                 </div>
                             </div>
@@ -141,7 +141,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="img-box">
-                                        <!-- <img src="../../assets/img/earth.png" alt=""> -->
+                                        <!-- <img src="/images/earth.png" alt=""> -->
                                     </div>
                                 </div>
                             </div>
@@ -211,7 +211,7 @@
                         <div class="grid-tos">
                             <div v-for="module in filteredModules" :key="module.id" :class="['module', { selected: selectedTOS === module.name }]" @click="selectedTOS = module.name">
                                 <h3 v-html="module.title"></h3>
-                                <img :src="`/assets/img/icons_tos/${module.name.toLowerCase()}.svg`" :alt="module.name"
+                                <img :src="`/images/icons_tos/${module.name.toLowerCase()}.svg`" :alt="module.name"
                                     :style="
                                         (module.name.toLowerCase() === 'ipuc') ||
                                         (module.name.toLowerCase() === 'icarga') ||
@@ -222,17 +222,17 @@
 
                         <div id="isos">
                             <div class="iso col-6" style="display: flex;">
-                                <img src="../../assets/img/iso27001.png" alt="ISO27001" style="width: 100%;"
+                                <img src="/images/iso27001.png" alt="ISO27001" style="width: 100%;"
                                     class="col-4 col-lg-4">
-                                <img src="../../assets/img/iso28000.png" alt="ISO28000" style="width: 100%;"
+                                <img src="/images/iso28000.png" alt="ISO28000" style="width: 100%;"
                                     class="col-4 col-lg-4">
-                                <img src="../../assets/img/iso31000.png" alt="ISO31000" style="width: 100%;"
+                                <img src="/images/iso31000.png" alt="ISO31000" style="width: 100%;"
                                     class="col-4 col-lg-4">
                             </div>
                             <div class="iso col-6" style="display: flex; align-items: center;">
-                                <img src="../../assets/img/aeo.png" alt="AEO" class="col-6 col-lg-6"
+                                <img src="/images/aeo.png" alt="AEO" class="col-6 col-lg-6"
                                     style="height: 60%;">
-                                <img src="/assets/img/microsoft_hub_nobg.png" alt="" class="col-6 col-lg-6"
+                                <img src="/images/microsoft_hub_nobg.png" alt="" class="col-6 col-lg-6"
                                     style="width: 100%;">
                             </div>
                         </div>
@@ -414,7 +414,7 @@
             <div ref="sectionRef" class="row sectionRef" style="align-items: center;">
                 <div class="col-md-7 numbers-text">
                     <p>A iPORT apoia operações portuárias e logísticas em todo o Brasil, com soluções utilizadas por grandes empresas e resultados comprovados em movimentação, controle de acesso e agendamento.</p>
-                    <!-- <img src="/assets/img/braza.png" alt="iPort no brasil"> -->
+                    <!-- <img src="/images/braza.png" alt="iPort no brasil"> -->
                 </div>
 
                 <div class="col-md-5 numbers">
@@ -447,7 +447,7 @@
                     <div class="col-lg-2 col-md-6 col-6">
                         <div class="box ">
                             <div class="img-box">
-                                <img src="../../assets/img/jose.jpg" class="img1" alt="">
+                                <img src="/images/jose.jpg" class="img1" alt="">
                             </div>
                             <div class="detail-box">
                                 <h5>
@@ -479,7 +479,7 @@
                     <div class="col-lg-2 col-md-6 col-6">
                         <div class="box ">
                             <div class="img-box">
-                                <img src="../../assets/img/alex.jpg" class="img1" alt="">
+                                <img src="/images/alex.jpg" class="img1" alt="">
                             </div>
                             <div class="detail-box">
                                 <h5>
@@ -499,7 +499,7 @@
                     <div class="col-lg-2 col-md-6 col-6">
                         <div class="box ">
                             <div class="img-box">
-                                <img src="../../assets/img/lucia.jpg" class="img1" alt="">
+                                <img src="/images/lucia.jpg" class="img1" alt="">
                             </div>
                             <div class="detail-box">
                                 <h5>
@@ -520,7 +520,7 @@
                     <div class="col-lg-2 col-md-6 col-6">
                         <div class="box ">
                             <div class="img-box">
-                                <img src="../../assets/img/vander.jpg" class="img1" alt="">
+                                <img src="/images/vander.jpg" class="img1" alt="">
                             </div>
                             <div class="detail-box">
                                 <h5>
@@ -540,7 +540,7 @@
                     <div class="col-lg-2 col-md-6 col-6">
                         <div class="box ">
                             <div class="img-box">
-                                <img src="../../assets/img/russo.jpg" class="img1" alt="">
+                                <img src="/images/russo.jpg" class="img1" alt="">
                             </div>
                             <div class="detail-box">
                                 <h5>
@@ -700,7 +700,7 @@
                     </div>
                     <div class="map-img my-3 mt-4">
                         <a href="https://maps.app.goo.gl/hscK6XAj6p9vEoXr7" target="_blank">
-                            <img src="../../assets/img/map.png" alt="">
+                            <img src="/images/map.png" alt="">
                         </a>
                     </div>
                     <!-- <h4>
@@ -1078,7 +1078,7 @@ function toggleCategory(categoria: string) {
 
 
 <style lang="scss" scoped>
-@use '../../style.scss' as style;
+@use '@/style.scss' as style;
 
 body {
 
@@ -1422,7 +1422,7 @@ body {
     }
 
     .why-section{
-        background: url('/assets/img/minimalist_boat_2.png');
+        background: url('/images/minimalist_boat_2.png');
         background-size:     cover;
         background-repeat:   no-repeat;
         background-position: left center;

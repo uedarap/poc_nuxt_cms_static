@@ -6,10 +6,10 @@
                 :class="{ 'selected': selectedSlide === index }">
                 <div class="swiper-slide-in" :class="{ 'selected': selectedSlide === index }">
                     <div class="slide-bg" :class="{ selected: selectedSlide === index }">
-                        <img :src="`./assets/img/${slide.photo}`" :alt="slide.title" />
+                        <img :src="`/images/${slide.photo}`" :alt="slide.title" />
                     </div>
                     <div class="touch" :style="{ display: selectedSlide === index ? 'none' : 'block' }">
-                        <img src="@/images/touch.svg" alt="">
+                        <img src="/images/touch.svg" alt="">
                     </div>
                     <transition name="fade" mode="out-in">
                         <div key="1" v-if="selectedSlide === index" class="slide-details">
@@ -18,7 +18,7 @@
                         </div>
                         <div key="2" v-else class="slide-title">
                             <h4 v-html="slide.title"></h4>
-                            <div class="img-logo"><img :src="`./assets/img/${slide.logo}`"  alt=""></div>
+                            <div class="img-logo"><img :src="`/images/${slide.logo}`"  alt=""></div>
                         </div>
                     </transition>
                 </div>

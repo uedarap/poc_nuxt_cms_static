@@ -48,19 +48,14 @@ const empresas = [
 // Criei essa função pra que quando tivermos uma build de produção, o caminho das imagens seja diferente do ambiente de desenvolvimento
 // Isso ocorre pq quando usamos ":src" em um componente Vue, o Vite não consegue resolver o caminho relativo corretamente
 function getImagePath(nome) {
-  return `../assets/img/clients_iport/${nome}.png`;
-  // if (import.meta.env.MODE === 'development') {
-  //   return `src/assets/img/clients_iport/${nome}.png`
-  // } else {
-  //   return `../assets/img/clients_iport/${nome}.png`
-  // }
+  return `/images/clients_iport/${nome}.png`;
 }
 
 </script>
 
 
 <style lang="scss" scoped>
-@use '../style.scss' as style;
+@use '@/style.scss' as style;
 
 @mixin white-gradient {
   background: linear-gradient(to right, rgba(217, 217, 217, 1) 0%, rgba(217, 217, 217, 0) 100%);

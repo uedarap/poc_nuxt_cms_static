@@ -23,12 +23,12 @@ export default {
             showBanner: false,
         };
     },
-    created() {
+    mounted() {
         const consent = localStorage.getItem('cookieConsent');
         if (!consent) {
             this.showBanner = true;
             setTimeout(() => {
-                document.querySelector('.cookie-banner').classList.remove('hidden-initially');
+                document.querySelector('.cookie-banner')?.classList.remove('hidden-initially');
             }, 100); // Remova a classe após o DOM ser atualizado
         }else if (consent === 'accepted') {
             this.enableOptionalCookies();
