@@ -19,46 +19,9 @@
             <!-- <img src="/images/hero-bg-e.png" alt=""> -->
         </div>
 
-        <!-- header section strats -->
-        <header class="header_section" :class="[{ top: activeSection == '' }, { scrolled: isScrolled }]">
-            <div class="container-fluid">
-                <nav class="navbar navbar-expand-lg custom_nav-container">
-                    <a class="navbar-brand" href="#">
-                        <img src="/images/iport_logo_mono_nobg2.png" alt="" />
-                    </a>
+        <!-- Header componentizado para reaproveitar menus com scroll, rotas Nuxt e links externos. -->
+        <LandingHeader :items="headerMenuItems" />
 
-                    <button class="navbar-toggler" type="button" data-toggle="collapse"
-                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class=""> </span>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav">
-                            <li v-for="section in sections" :key="section.id" class="nav-item"
-                                :class="{ active: activeSection === section.id }">
-                                <a class="nav-link" href="javascript:void(0)"
-                                    @click="scrollToSection(section.id, section.offset || 50)">
-                                    {{ section.name }}
-                                </a>
-                            </li>
-                            <!-- <li class="nav-item">
-                                <a class="nav-link" href="https://www.iportsolutions.com.br/blog" target="_blank">
-                                    Blog
-                                </a>
-                            </li> -->
-                            <li class="nav-item">
-                                <a class="nav-link" href="https://cubo.network/pt/comunidade-startups/iport"
-                                    target="_blank">
-                                    <img class="cubo" :class="[{ scrolled: isScrolled }]"
-                                        src="/images/cubo.svg" alt="itaú cubo" />
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-        </header>
         <!-- end header section -->
 
         <!-- slider section -->
@@ -768,14 +731,33 @@
 import AutoCarousel from '@/components/AutoCarousel.vue';
 import LGPD from '@/components/LGPD.vue';
 import Carousel from '@/components/Carousel.vue';
+import LandingHeader from '@/components/LandingHeader.vue';
 import linkedinPosts from "@/assets/linkedin_posts.json";
 import modulesJson from "@/assets/modules.json";
 import { computed, nextTick, onMounted, onUnmounted, ref } from 'vue';
 
-const posts = ref(<any>[]);
-const isScrolled = ref(false);
+const config = useRuntimeConfig()
+const baseUrl = config.app.baseURL
+const siteUrl = config.public.siteUrl.replace(/\/$/, '')
+const canonicalUrl = `${siteUrl}${baseUrl === '/' ? '' : baseUrl.slice(0, -1)}/`
+const ogImage = `${siteUrl}${baseUrl}images/blog-cover-static-site.svg`
 
-const activeSection = ref('');
+useSeoMeta({
+  title: 'POC Blog estático com Nuxt Content',
+  description: 'Base moderna para blog estático com Nuxt 4, Nuxt Content, GitHub Pages e Pages CMS.',
+  ogTitle: 'POC Blog estático com Nuxt Content',
+  ogDescription: 'Markdown versionado em Git, build estático e edição via Pages CMS.',
+  ogType: 'website',
+  ogImage,
+  twitterCard: 'summary_large_image'
+})
+
+useHead({
+  link: [{ rel: 'canonical', href: canonicalUrl }]
+})
+
+const posts = ref(<any>[]);
+
 const selectedTOS = ref('');
 const selectedCategory = ref<string | null>(null);
 
@@ -784,6 +766,25 @@ const sections = [
     { id: 'advantages', name: 'Vantagens', offset: 100 },
     { id: 'time', name: 'Nosso time', offset: 1 },
     { id: 'contact', name: 'Contato' },
+];
+
+// Configura os itens do header componentizado, misturando scroll interno, rota Nuxt e link externo.
+const headerMenuItems = [
+    ...sections.map((section) => ({
+        type: 'section' as const,
+        label: section.name,
+        id: section.id,
+        offset: section.offset,
+    })),
+    { type: 'route' as const, label: 'Blog', to: '/blog' },
+    {
+        type: 'external' as const,
+        label: 'Itau Cubo',
+        href: 'https://cubo.network/pt/comunidade-startups/iport',
+        target: '_blank',
+        image: '/images/cubo.svg',
+        imageAlt: 'Itau Cubo',
+    },
 ];
 
 const sectionRef = ref(null);
@@ -1017,8 +1018,6 @@ onMounted(async () => {
         }
 
         initLinkedInCarousel();
-        window.addEventListener('scroll', handleScroll);
-        handleScroll(); // Atualizar na montagem inicial
     } catch (e) {
         console.log(e);
     }
@@ -1045,8 +1044,6 @@ onUnmounted(() => {
     if (carousel?.hasClass('owl-loaded')) {
         carousel.trigger('destroy.owl.carousel');
     }
-
-    window.removeEventListener('scroll', handleScroll);
 });
 
 const formatDate = (timestampValue: any) => {
@@ -1095,29 +1092,6 @@ const hidePlaceholder = () => {
     }
 }
 
-const handleScroll = () => {
-    let currentSection = '';
-    isScrolled.value = window.scrollY > 50; // pode ajustar o "50px"
-    sections.forEach(({ id }) => {
-        const section = document.getElementById(id);
-        if (section) {
-            const rect = section.getBoundingClientRect();
-            if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
-                currentSection = id;
-            }
-        }
-    });
-    activeSection.value = currentSection;
-};
-
-const scrollToSection = (id: any, offset = 50) => {
-    const section = document.getElementById(id);
-    if (section) {
-        const y = section.getBoundingClientRect().top + window.scrollY - offset;
-        window.scrollTo({ top: y, behavior: 'smooth' });
-    }
-};
-
 const categories = computed(() => {
   const set = new Set<string>();
 
@@ -1155,10 +1129,6 @@ function toggleCategory(categoria: string) {
 
 body {
 
-    .nav-item {
-        align-content: center;
-    }
-
     .btn1 {
         background-color: style.$white !important;
         color: style.$primary !important;
@@ -1171,38 +1141,9 @@ body {
             margin-right: 10px;
         }
 
-        .navbar-brand img {
-            width: 200px;
-            transition: width 0.3s ease;
-        }
-
         @media screen and (max-width: 992px) {
             // background: linear-gradient(130deg, style.$secondary, style.$primary);
         }
-    }
-
-    .header_section.scrolled {
-        padding: 8px 0; // diminui o padding
-        background: rgba(#00204A, 0.9);
-
-        .navbar-brand img {
-            width: 150px; // logo menor
-            transition: width 0.3s ease;
-        }
-
-        .nav-link {
-            padding: 3px 15px; // links mais compactos
-        }
-
-        .cubo {
-            width: 60px; // cubo menor
-        }
-    }
-
-    .cubo {
-        width: 100px;
-        opacity: 0.7;
-        transition: width 0.3s ease, opacity 0.3s ease;
     }
 
     @media screen and (max-width: 767px) {
