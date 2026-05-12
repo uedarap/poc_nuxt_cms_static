@@ -55,6 +55,26 @@ export default defineNuxtConfig({
             ],
             script: [
                 {
+                    // Carrega o jQuery legado antes dos plugins que dependem de window.jQuery.
+                    src: `${baseURL}js/jquery-3.4.1.min.js`,
+                    defer: true,
+                },
+                {
+                    // Ativa os componentes do Bootstrap 4, incluindo o carousel #customCarousel1.
+                    src: `${baseURL}js/bootstrap.js`,
+                    defer: true,
+                },
+                {
+                    // Registra $.fn.owlCarousel para o carousel de posts dentro de .carousel-wrap.
+                    src: `${baseURL}js/owl.carousel.min.js`,
+                    defer: true,
+                },
+                {
+                    // Mantem o plugin de popup disponivel para qualquer uso legado da landing page.
+                    src: `${baseURL}js/jquery.magnific-popup.min.js`,
+                    defer: true,
+                },
+                {
                   innerHTML: `(function (w, d, s, l, i) {
                     w[l] = w[l] || [];
                     w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
@@ -85,7 +105,7 @@ export default defineNuxtConfig({
                     innerHTML:
                         '<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KGLHL7JH" height="0" width="0" style="display:none;visibility:hidden"></iframe>',
                     tagPosition: "bodyOpen",
-                },
+                }
             ],
             style: [
                 {

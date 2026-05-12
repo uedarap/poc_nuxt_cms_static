@@ -169,7 +169,6 @@
         <!-- end slider section -->
     </div>
 
-
     <!-- #region service section -->
     <section class="service_section layout_padding mt-5" id="service_section">
         <div class="service_container">
@@ -269,7 +268,6 @@
         </div>
     </section>
     <!-- #endregion service section -->
-
 
     <!-- about section -->
     <section id="about_section" class="about_section layout_padding">
@@ -398,7 +396,6 @@
         </div>
     </section>
     <!-- #endregion about section -->
-
 
     <!-- why section -->
     <section class="why-section layout_padding partner-section" style="padding-top: 7rem;;">
@@ -563,8 +560,7 @@
     </section>
     <!-- end team section -->
 
-
-    <!-- client section -->
+    <!-- Social section -->
     <section v-if="posts.length" class="client_section layout_padding post_section">
         <div class="container">
             <div class="heading_container heading_center psudo_white_primary mb_45">
@@ -604,7 +600,6 @@
         </div>
     </section>
     <!-- end client section -->
-
 
     <!-- info section -->
     <section id="contact" class="info_section layout_padding2">
@@ -765,7 +760,6 @@
         </div>
     </section>
     <!-- end info section -->
-
 
 </template>
 
@@ -948,13 +942,43 @@ const slides = [
     },
 ];
 
+// Centraliza o acesso ao jQuery global carregado pelos scripts legados em nuxt.config.ts.
+const getLegacyJquery = () => (window as any).jQuery || (window as any).$;
+
+// Aguarda os plugins do Bootstrap e do Owl serem registrados antes de inicializar os carrosseis.
+const waitForLegacyCarouselScripts = async (attempts = 40, interval = 100) => {
+    for (let attempt = 0; attempt < attempts; attempt += 1) {
+        const jquery = getLegacyJquery();
+
+        if (jquery?.fn?.carousel && jquery?.fn?.owlCarousel) return jquery;
+
+        await new Promise((resolve) => window.setTimeout(resolve, interval));
+    }
+
+    return null;
+};
+
+// Inicializa manualmente o carousel principal para nao depender somente do data-ride do Bootstrap.
+const initHeroCarousel = (jquery: any) => {
+    const carousel = jquery('#customCarousel1');
+
+    if (!carousel?.length || !jquery.fn?.carousel) return;
+
+    carousel.carousel({
+        interval: 6000,
+        ride: 'carousel',
+        pause: 'hover',
+    });
+};
+
 const initLinkedInCarousel = () => {
-    const jquery = (window as any).jQuery || (window as any).$;
+    const jquery = getLegacyJquery();
     const carousel = jquery?.('.client_owl-carousel');
 
     if (!carousel?.length || !jquery.fn?.owlCarousel) return;
 
     if (carousel.hasClass('owl-loaded')) {
+        // Remove a estrutura gerada pelo Owl antes de recriar, evitando wrappers duplicados no hot reload.
         carousel.trigger('destroy.owl.carousel');
         carousel.removeClass('owl-loaded owl-hidden');
         carousel.find('.owl-stage-outer').children().unwrap();
@@ -986,6 +1010,12 @@ onMounted(async () => {
     try {
         posts.value = linkedinPosts.data;
         await nextTick();
+        const jquery = await waitForLegacyCarouselScripts();
+
+        if (jquery) {
+            initHeroCarousel(jquery);
+        }
+
         initLinkedInCarousel();
         window.addEventListener('scroll', handleScroll);
         handleScroll(); // Atualizar na montagem inicial
@@ -1009,7 +1039,7 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-    const jquery = (window as any).jQuery || (window as any).$;
+    const jquery = getLegacyJquery();
     const carousel = jquery?.('.client_owl-carousel');
 
     if (carousel?.hasClass('owl-loaded')) {
