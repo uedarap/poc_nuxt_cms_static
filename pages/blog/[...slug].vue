@@ -415,9 +415,14 @@ const formatDate = (value: string) => {
   border-radius: 10px;
 }
 
+/* Forca a cor dos spans gerados pelo highlight dentro de blocos Markdown, mesmo com style inline. */
+.article-body :deep(.language-md code span) {
+  color: style.$alt-fourth;
+}
+
 .article-body :deep(pre code) {
   padding: 0;
-  color: inherit;
+  color: style.$white;
   background: transparent;
 }
 

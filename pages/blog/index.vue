@@ -37,6 +37,9 @@ const headerMenuItems = [
 // Guarda a categoria selecionada para controlar o estado visual dos chips e filtrar a lista.
 const activeCategory = ref('Todos')
 
+// Guarda o termo digitado no campo de busca para filtrar as publicacoes em tempo real.
+const searchQuery = ref('')
+
 // Busca os posts reais do Nuxt Content e deixa o build estatico receber os dados no SSR.
 const { data: contentPosts } = await useAsyncData('blog-index-posts', () => {
    return queryCollection('blog')
@@ -94,11 +97,32 @@ const categories = computed(() => {
    return ['Todos', ...Array.from(tags).sort((a, b) => a.localeCompare(b))]
 })
 
-// Calcula os posts visiveis conforme o filtro selecionado pelo usuario.
-const filteredPosts = computed(() => {
-   if (activeCategory.value === 'Todos') return listPosts.value
+// Normaliza textos para a busca ignorar acentos, maiusculas e minusculas.
+const normalizeSearchText = (value: string) => {
+   return value
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+}
 
-   return listPosts.value.filter((post) => post.tags.includes(activeCategory.value))
+// Calcula os posts visiveis combinando categoria selecionada e termo digitado.
+const filteredPosts = computed(() => {
+   const normalizedQuery = normalizeSearchText(searchQuery.value.trim())
+
+   return listPosts.value.filter((post) => {
+      const matchesCategory = activeCategory.value === 'Todos' || post.tags.includes(activeCategory.value)
+
+      if (!normalizedQuery) return matchesCategory
+
+      const searchableText = normalizeSearchText([
+         post.title,
+         post.description,
+         post.date,
+         ...post.tags
+      ].join(' '))
+
+      return matchesCategory && searchableText.includes(normalizedQuery)
+   })
 })
 
 // Atualiza a categoria ativa quando o usuario clica em um dos chips.
@@ -167,9 +191,9 @@ useSeoMeta({
             <div class="blog-container">
                <!-- Renderiza o primeiro artigo como destaque quando existir conteudo publicado. -->
                <article v-if="featuredPost" class="featured-post">
+                  <span class="span-destaque">Destaque</span>
                   <NuxtLink class="featured-post__image" :to="featuredPost.link">
                      <img :src="featuredPost.image" :alt="featuredPost.title">
-                     <span>Destaque</span>
                   </NuxtLink>
 
                   <div class="featured-post__content">
@@ -193,8 +217,36 @@ useSeoMeta({
                </article>
 
                <div class="posts-heading">
-                  <h2>Ultimas publicacoes</h2>
+                  <h2>Publicações</h2>
                   <p>{{ filteredPosts.length }} conteudos encontrados</p>
+               </div>
+
+               <!-- Busca e filtros refinam a grade usando os posts ja carregados pelo Nuxt Content. -->
+               <div class="publication-tools" aria-label="Filtros de publicacoes">
+                  <label class="search-field" for="publication-search">
+                     <i class="fa fa-search" aria-hidden="true"></i>
+                     <span class="sr-only">Pesquisar publicacoes</span>
+                     <input
+                        id="publication-search"
+                        v-model="searchQuery"
+                        type="search"
+                        placeholder="Pesquisar por titulo, tag ou assunto"
+                        autocomplete="off"
+                     >
+                  </label>
+
+                  <!-- <div class="publication-categories" aria-label="Filtrar publicacoes por categoria">
+                     <button
+                        v-for="category in categories"
+                        :key="category"
+                        type="button"
+                        class="category-chip"
+                        :class="{ 'category-chip--active': activeCategory === category }"
+                        @click="selectCategory(category)"
+                     >
+                        {{ category }}
+                     </button>
+                  </div> -->
                </div>
 
                <div v-if="filteredPosts.length" class="post-grid">
@@ -224,7 +276,7 @@ useSeoMeta({
                   </article>
                </div>
 
-               <p v-else class="empty-state">Nenhuma publicacao encontrada para essa categoria.</p>
+               <p v-else class="empty-state">Nenhuma publicacao encontrada para os filtros selecionados.</p>
             </div>
          </section>
 
@@ -464,12 +516,13 @@ useSeoMeta({
 
 .featured-post {
    display: grid;
+   position: relative;
    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-   overflow: hidden;
+   /* overflow: hidden; */
    margin-bottom: 64px;
    background: #ffffff;
    border: 1px solid style.$line;
-   border-radius: 12px;
+   border-radius: 1rem;
    box-shadow: style.$shadow;
 }
 
@@ -479,6 +532,7 @@ useSeoMeta({
    min-height: 390px;
    overflow: hidden;
    background: style.$white;
+   border-radius: 1rem 0 0 1rem;
 }
 
 .featured-post__image img,
@@ -488,15 +542,17 @@ useSeoMeta({
    object-fit: cover;
 }
 
-.featured-post__image span {
+.span-destaque {
    position: absolute;
-   top: 18px;
-   left: 18px;
-   padding: 7px 15px;
+   top: -18px;
+   left: -18px;
+   padding: .5rem 1rem;
    color: style.$primary;
+   font-size: 1.1rem;
    font-weight: 900;
    background: style.$yellow;
-   border-radius: 999px;
+   border-radius: 5rem;
+   z-index: 99;
 }
 
 .featured-post__content {
@@ -587,6 +643,50 @@ useSeoMeta({
    margin: 0;
    color: style.$dark;
    font-weight: 800;
+}
+
+/* Ferramentas de publicacao agrupam busca textual e categorias sem afastar o usuario da grade. */
+.publication-tools {
+   display: grid;
+   gap: 18px;
+   margin: 0 0 30px;
+   padding: 22px;
+   background: #ffffff;
+   border: 1px solid style.$line;
+   border-radius: 12px;
+   box-shadow: 0 10px 28px rgba(10, 38, 71, 0.08);
+}
+
+.search-field {
+   display: flex;
+   align-items: center;
+   gap: 12px;
+   min-height: 54px;
+   padding: 0 16px;
+   color: style.$secondary;
+   background: style.$white2;
+   border: 1px solid rgba(10, 38, 71, 0.12);
+   border-radius: 8px;
+}
+
+.search-field input {
+   width: 100%;
+   min-width: 0;
+   color: style.$dark;
+   font-weight: 800;
+   background: transparent;
+   border: 0;
+   outline: none;
+}
+
+.search-field input::placeholder {
+   color: rgba(33, 37, 41, 0.54);
+}
+
+.publication-categories {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 10px;
 }
 
 .post-grid {
