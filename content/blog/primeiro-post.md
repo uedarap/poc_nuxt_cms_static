@@ -2,7 +2,7 @@
 title: "Primeiro post da POC"
 description: "Um exemplo de post Markdown renderizado com Nuxt Content e publicado como site estático."
 date: "2026-04-10"
-cover: "/images/blog-cover-static-site.svg"
+cover: "/blog/images/blog-cover-static-site.svg"
 tags:
   - Nuxt
   - Markdown

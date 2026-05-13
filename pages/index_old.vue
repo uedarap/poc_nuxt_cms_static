@@ -3,7 +3,8 @@ const config = useRuntimeConfig()
 const baseUrl = config.app.baseURL
 const siteUrl = config.public.siteUrl.replace(/\/$/, '')
 const canonicalUrl = `${siteUrl}${baseUrl === '/' ? '' : baseUrl.slice(0, -1)}/`
-const ogImage = `${siteUrl}${baseUrl}images/blog-cover-static-site.svg`
+// Mantem a URL de compartilhamento alinhada com a pasta publica real do asset legado.
+const ogImage = `${siteUrl}${baseUrl}blog/images/blog-cover-static-site.svg`
 
 const { data: posts } = await useAsyncData('home-posts', () => {
   return queryCollection('blog')
@@ -46,7 +47,8 @@ useHead({
         </div>
 
         <div class="hero__panel" aria-hidden="true">
-          <img src="/images/blog-cover-static-site.svg" alt="">
+          <!-- Usa o caminho publico existente para evitar falha de resolucao do Vite no build. -->
+          <img src="/blog/images/blog-cover-static-site.svg" alt="">
         </div>
       </div>
     </section>

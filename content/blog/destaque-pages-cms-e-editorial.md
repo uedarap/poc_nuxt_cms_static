@@ -23,4 +23,7 @@ O Pages CMS usa a configuração `.pages.yml` para entender quais arquivos podem
 Esse modelo evita backend em produção e mantém o conteúdo auditável no histórico do repositório.
 
 ![Teste Web](https://i.pinimg.com/564x/0b/f9/33/0bf9330d30535065fdeb463720d6f3c7.jpg)
+
+Testando nova linha entre imagens
+
 ![Teste](/blog/images/blog-cover-cms.svg)

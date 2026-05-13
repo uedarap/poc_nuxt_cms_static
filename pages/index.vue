@@ -743,7 +743,7 @@ const canonicalUrl = `${siteUrl}${baseUrl === '/' ? '' : baseUrl.slice(0, -1)}/`
 const ogImage = `${siteUrl}${baseUrl}images/blog-cover-static-site.svg`
 
 useSeoMeta({
-  title: 'POC Blog estático com Nuxt Content',
+  title: 'iPORT Solutions',
   description: 'Base moderna para blog estático com Nuxt 4, Nuxt Content, GitHub Pages e Pages CMS.',
   ogTitle: 'POC Blog estático com Nuxt Content',
   ogDescription: 'Markdown versionado em Git, build estático e edição via Pages CMS.',
@@ -1142,7 +1142,7 @@ body {
         }
 
         @media screen and (max-width: 992px) {
-            // background: linear-gradient(130deg, style.$secondary, style.$primary);
+            background: linear-gradient(130deg, style.$secondary, style.$primary);
         }
     }
 
@@ -1158,7 +1158,6 @@ body {
     }
 
     .service_section {
-        // margin: 50px 0 150px 0;
 
         .tos {
             margin-top: 2rem;
