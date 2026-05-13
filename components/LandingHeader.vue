@@ -176,6 +176,7 @@ onUnmounted(() => {
 .header_section.scrolled {
     padding: 8px 0;
     background: rgba(#00204A, 0.9);
+    z-index: 9999;
 
     .navbar-brand img {
         width: 150px;
