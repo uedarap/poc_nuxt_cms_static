@@ -108,7 +108,7 @@ const selectCategory = (category: string) => {
 
 // Configura os metadados da pagina principal do blog com a imagem institucional padrao.
 useSeoMeta({
-   title: 'iPORT - Blog',
+   title: 'iPORT / Blog',
    description:
       'Conteudos sobre tecnologia, automacao portuaria, logistica e transformacao digital.',
    ogTitle: 'Blog iPORT Solutions',
@@ -245,19 +245,6 @@ useSeoMeta({
             </div>
          </section>
       </main>
-
-      <!-- Footer institucional simples para fechar a pagina do blog sem depender de componentes globais. -->
-      <footer class="blog-footer">
-         <div class="blog-container blog-footer__inner">
-            <img src="/images/iport_logo_mono_nobg2.png" alt="iPORT Solutions">
-
-            <div class="blog-footer__links">
-               <NuxtLink to="/">Home</NuxtLink>
-               <NuxtLink to="/blog">Blog</NuxtLink>
-               <a href="https://www.iportsolutions.com.br/" target="_blank" rel="noopener">Site institucional</a>
-            </div>
-         </div>
-      </footer>
    </div>
 </template>
 
@@ -432,6 +419,8 @@ useSeoMeta({
 .button--secondary {
    color: style.$primary;
    background: style.$yellow;
+   font-size: 1.3rem;
+   padding: 1rem 2.5rem;
 }
 
 /* Secao de filtros separada para manter respiro entre o hero e a listagem. */

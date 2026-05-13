@@ -38,9 +38,9 @@ const ogImage = computed(() => post.value?.cover ? `${siteUrl}${baseUrl}${post.v
 const coverImage = computed(() => post.value?.cover || '/images/bg_iport_video.png')
 
 useSeoMeta({
-  title: () => post.value?.title,
+  title: () => {return 'iPORT / Blog - ' + post.value?.title},
   description: () => post.value?.description,
-  ogTitle: () => post.value?.title,
+  ogTitle: () => {return 'iPORT / Blog - ' + post.value?.title},
   ogDescription: () => post.value?.description,
   ogType: 'article',
   ogImage: () => ogImage.value,
@@ -78,8 +78,10 @@ const formatDate = (value: string) => {
           </NuxtLink>
 
           <p class="article-hero__eyebrow">Artigo</p>
-          <h1>{{ post.title }}</h1>
-          <p class="article-hero__description">{{ post.description }}</p>
+          <div style="display: flex;">
+            <h1 style="flex: 3;">{{ post.title }}</h1>
+            <p class="article-hero__description" style="flex: 1;">{{ post.description }}</p>
+          </div>
 
           <div class="article-meta">
             <p class="article-date">
@@ -152,8 +154,7 @@ const formatDate = (value: string) => {
   position: relative;
   display: flex;
   align-items: end;
-  min-height: 620px;
-  padding: 150px 0 76px;
+  padding: 7rem 0 5rem;
   overflow: hidden;
   background-position: center;
   background-size: cover;
