@@ -118,8 +118,10 @@ const formatDate = (value: string) => {
       </section>
     </main>
 
+    <ContactSection/>
+
     <!-- Footer institucional replica o fechamento da listagem do blog. -->
-    <footer class="article-footer">
+    <!-- <footer class="article-footer">
       <div class="article-container article-footer__inner">
         <img src="/images/iport_logo_mono_nobg2.png" alt="iPORT Solutions">
 
@@ -129,7 +131,8 @@ const formatDate = (value: string) => {
           <a href="https://www.iportsolutions.com.br/" target="_blank" rel="noopener">Site institucional</a>
         </div>
       </div>
-    </footer>
+    </footer> -->
+    
   </div>
 </template>
 

@@ -281,7 +281,7 @@ useSeoMeta({
          </section>
 
          <!-- CTA final de newsletter, sem integracao de backend por enquanto. -->
-         <section class="newsletter-section">
+         <!-- <section class="newsletter-section">
             <div class="blog-container newsletter-section__inner">
                <div>
                   <p class="newsletter-section__eyebrow">Insights iPORT</p>
@@ -295,7 +295,9 @@ useSeoMeta({
                   <button type="submit">Cadastrar</button>
                </form>
             </div>
-         </section>
+         </section> -->
+
+         <ContactSection/>
       </main>
    </div>
 </template>
