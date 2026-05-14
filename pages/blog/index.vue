@@ -40,6 +40,12 @@ const activeCategory = ref('Todos')
 // Guarda o termo digitado no campo de busca para filtrar as publicacoes em tempo real.
 const searchQuery = ref('')
 
+// Controla quantos cards entram na tela inicialmente para nao carregar uma grade enorme de uma vez.
+const postsPerLoad = 6
+const visiblePostCount = ref(postsPerLoad)
+const loadMoreTrigger = ref<HTMLElement | null>(null)
+let loadMoreObserver: IntersectionObserver | null = null
+
 // Busca os posts reais do Nuxt Content e deixa o build estatico receber os dados no SSR.
 const { data: contentPosts } = await useAsyncData('blog-index-posts', () => {
    return queryCollection('blog')
@@ -125,10 +131,59 @@ const filteredPosts = computed(() => {
    })
 })
 
+// Mostra apenas uma fatia dos posts filtrados; o restante entra conforme o usuario avanca na pagina.
+const visiblePosts = computed(() => {
+   return filteredPosts.value.slice(0, visiblePostCount.value)
+})
+
+// Indica se ainda existe conteudo filtrado para carregar abaixo da primeira leva de cards.
+const hasMorePosts = computed(() => {
+   return visiblePostCount.value < filteredPosts.value.length
+})
+
+// Calcula quantos posts ainda estao escondidos para orientar o texto do botao de carregamento.
+const remainingPosts = computed(() => {
+   return Math.max(filteredPosts.value.length - visiblePostCount.value, 0)
+})
+
 // Atualiza a categoria ativa quando o usuario clica em um dos chips.
 const selectCategory = (category: string) => {
    activeCategory.value = category
 }
+
+// Libera mais uma leva de cards tanto pelo scroll automatico quanto pelo botao de fallback.
+const loadMorePosts = () => {
+   visiblePostCount.value = Math.min(visiblePostCount.value + postsPerLoad, filteredPosts.value.length)
+}
+
+// Ao mudar busca ou categoria, volta para a primeira leva para evitar uma listagem longa de cara.
+watch([searchQuery, activeCategory], () => {
+   visiblePostCount.value = postsPerLoad
+})
+
+/*<!-- #region Carregar posts automaticamente -->
+Esse bloco é usado para carregar mais cards quando o usuario se aproxima do fim da grade
+onMounted(() => {
+   if (!loadMoreTrigger.value) return
+
+   // Usa IntersectionObserver para carregar mais cards quando o usuario se aproxima do fim da grade.
+   loadMoreObserver = new IntersectionObserver((entries) => {
+      const entry = entries[0]
+
+      if (entry?.isIntersecting && hasMorePosts.value) {
+         loadMorePosts()
+      }
+   }, {
+      rootMargin: '240px 0px'
+   })
+
+   loadMoreObserver.observe(loadMoreTrigger.value)
+})
+onUnmounted(() => {
+   // Desliga o observador ao sair da pagina para nao manter callbacks vivos sem necessidade.
+   loadMoreObserver?.disconnect()
+})
+<!-- #endregion Carregar posts automaticamente -->*/
 
 // Configura os metadados da pagina principal do blog com a imagem institucional padrao.
 useSeoMeta({
@@ -193,7 +248,7 @@ useSeoMeta({
                <article v-if="featuredPost" class="featured-post">
                   <span class="span-destaque">Destaque</span>
                   <NuxtLink class="featured-post__image" :to="featuredPost.link">
-                     <img :src="featuredPost.image" :alt="featuredPost.title">
+                     <img :src="featuredPost.image" :alt="featuredPost.title" loading="eager" fetchpriority="high">
                   </NuxtLink>
 
                   <div class="featured-post__content">
@@ -250,9 +305,9 @@ useSeoMeta({
                </div>
 
                <div v-if="filteredPosts.length" class="post-grid">
-                  <article v-for="post in filteredPosts" :key="post.link" class="blog-card">
+                  <article v-for="post in visiblePosts" :key="post.link" class="blog-card">
                      <NuxtLink class="blog-card__image" :to="post.link">
-                        <img :src="post.image" :alt="post.title">
+                        <img :src="post.image" :alt="post.title" loading="lazy" decoding="async">
                      </NuxtLink>
 
                      <div class="blog-card__content">
@@ -276,7 +331,14 @@ useSeoMeta({
                   </article>
                </div>
 
-               <p v-else class="empty-state">Nenhuma publicacao encontrada para os filtros selecionados.</p>
+               <!-- Sentinela usada pelo IntersectionObserver para liberar mais posts perto do fim da lista. -->
+               <div v-if="hasMorePosts" ref="loadMoreTrigger" class="load-more">
+                  <button type="button" class="load-more__button" @click="loadMorePosts">
+                     Carregar mais {{ Math.min(postsPerLoad, remainingPosts) }} publicações
+                  </button>
+               </div>
+
+               <p v-if="!filteredPosts.length" class="empty-state">Nenhuma publicacao encontrada para os filtros selecionados.</p>
             </div>
          </section>
 
@@ -318,7 +380,7 @@ useSeoMeta({
    --line: rgba(10, 38, 71, 0.1);
    --shadow: 0 16px 40px rgba(10, 38, 71, 0.12);
    min-height: 100vh;
-   background: style.$white2;
+   background: style.$white;
    color: style.$dark;
 }
 
@@ -480,7 +542,7 @@ useSeoMeta({
 /* Secao de filtros separada para manter respiro entre o hero e a listagem. */
 .category-section {
    padding: 42px 0 28px;
-   background: style.$white2;
+   background: style.$white;
 }
 
 .category-filters {
@@ -513,7 +575,7 @@ useSeoMeta({
 /* Posts section organiza o destaque e a grade em uma area clara, sem depender de Tailwind. */
 .posts-section {
    padding: 3rem 0 4rem;
-   background: style.$white2;
+   background: style.$white;
 }
 
 .featured-post {
@@ -666,7 +728,7 @@ useSeoMeta({
    min-height: 54px;
    padding: 0 16px;
    color: style.$secondary;
-   background: style.$white2;
+   background: style.$white;
    border: 1px solid rgba(10, 38, 71, 0.12);
    border-radius: 8px;
 }
@@ -766,6 +828,30 @@ useSeoMeta({
    text-align: center;
    background: style.$white;
    border-radius: 12px;
+}
+
+/* Controle de carregamento incremental separa a grade inicial das proximas levas de posts. */
+.load-more {
+   display: flex;
+   justify-content: center;
+   margin-top: 34px;
+}
+
+.load-more__button {
+   min-height: 48px;
+   padding: 12px 20px;
+   color: style.$white;
+   font-weight: 900;
+   background: style.$alt-third;
+   border: 0;
+   border-radius: 8px;
+   cursor: pointer;
+   transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.load-more__button:hover {
+   transform: translateY(-2px);
+   box-shadow: 0 12px 26px rgba(10, 38, 71, 0.14);
 }
 
 /* Newsletter fecha a pagina com CTA escuro e botao amarelo, como recomendado no layout do Figma. */

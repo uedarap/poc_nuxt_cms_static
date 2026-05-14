@@ -1064,7 +1064,7 @@ body {
 
 
                         h3 {
-                            color: style.$white2;
+                            color: style.$white;
                         }
 
                         img {
@@ -1309,7 +1309,7 @@ body {
         
         .numbers-text{
             align-self: start;
-            color: style.$white2;
+            color: style.$white;
             font-size: 1.3rem;
         }
 

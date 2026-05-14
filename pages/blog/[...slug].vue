@@ -142,7 +142,7 @@ const formatDate = (value: string) => {
 /* Pagina do artigo centraliza a mesma identidade visual usada na listagem do blog. */
 .article-page {
   min-height: 100vh;
-  background: style.$white2;
+  background: style.$white;
   color: style.$dark;
 }
 

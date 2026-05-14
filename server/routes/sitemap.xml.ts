@@ -1,7 +1,12 @@
+import { readdir, readFile } from "node:fs/promises";
+import { join, parse } from "node:path";
+
 type SitemapBlogPost = {
     path: string;
     date?: string;
 };
+
+const contentBlogDir = join(process.cwd(), "content", "blog");
 
 const escapeXml = (value: string) => {
     // Escapa caracteres especiais para manter o XML valido mesmo com URLs futuras mais complexas.
@@ -24,6 +29,34 @@ const normalizeDate = (value?: string) => {
     return parsedDate.toISOString().slice(0, 10);
 };
 
+const readFrontmatterValue = (frontmatter: string, field: string) => {
+    // Extrai campos simples do YAML usado pelo Pages CMS sem depender de parser extra no build.
+    const match = frontmatter.match(new RegExp(`^${field}:\\s*"?([^"\\n]+)"?\\s*$`, "m"));
+
+    return match?.[1]?.trim();
+};
+
+const readBlogPostsFromMarkdown = async () => {
+    // Le os Markdown direto do repositorio para o sitemap continuar funcionando no prerender estatico.
+    const files = await readdir(contentBlogDir);
+    const markdownFiles = files.filter((file) => file.endsWith(".md"));
+    const posts = await Promise.all(markdownFiles.map(async (file) => {
+        const content = await readFile(join(contentBlogDir, file), "utf8");
+        const frontmatter = content.match(/^---\n([\s\S]*?)\n---/)?.[1] || "";
+        const draft = readFrontmatterValue(frontmatter, "draft") === "true";
+        const slug = readFrontmatterValue(frontmatter, "slug") || parse(file).name;
+        const date = readFrontmatterValue(frontmatter, "date");
+
+        return {
+            draft,
+            path: `/blog/${slug}`,
+            date,
+        };
+    }));
+
+    return posts.filter((post) => !post.draft);
+};
+
 export default defineEventHandler(async (event) => {
     // Reaproveita os valores de deploy para gerar URLs absolutas corretas em producao.
     const config = useRuntimeConfig(event);
@@ -35,10 +68,7 @@ export default defineEventHandler(async (event) => {
     const siteRoot = basePath && siteUrl.endsWith(basePath) ? siteUrl : `${siteUrl}${basePath}`;
 
     // Busca somente posts publicados para evitar expor rascunhos aos mecanismos de busca.
-    const blogPosts = await queryCollection("blog")
-        .where("draft", "<>", true)
-        .select("path", "date")
-        .all() as SitemapBlogPost[];
+    const blogPosts = await readBlogPostsFromMarkdown() as SitemapBlogPost[];
 
     // Lista rotas fixas e rotas vindas do Content em um unico fluxo para montar o XML.
     const urls: Array<{ loc: string; changefreq: string; priority: string; lastmod?: string }> = [
