@@ -78,7 +78,7 @@ const formatDate = (value: string) => {
           </NuxtLink>
 
           <p class="article-hero__eyebrow">Artigo</p>
-          <div style="display: flex;">
+          <div class="title">
             <h1 style="flex: 3;">{{ post.title }}</h1>
             <p class="article-hero__description" style="flex: 1;">{{ post.description }}</p>
           </div>
@@ -99,7 +99,7 @@ const formatDate = (value: string) => {
       <!-- Corpo do Markdown fica em uma coluna de leitura com tipografia propria. -->
       <section class="article-section">
         <div class="article-container article-shell">
-          <aside class="article-aside" aria-label="Resumo do artigo">
+          <!-- <aside class="article-aside" aria-label="Resumo do artigo">
             <p class="article-aside__label">Publicado em</p>
             <p class="article-aside__date">{{ formatDate(post.date) }}</p>
 
@@ -107,7 +107,7 @@ const formatDate = (value: string) => {
               Ver todos os artigos
               <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
             </NuxtLink>
-          </aside>
+          </aside> -->
 
           <article class="article-content">
             <img v-if="post.cover" class="article-cover" :src="post.cover" :alt="`Capa do post ${post.title}`">
@@ -147,6 +147,11 @@ const formatDate = (value: string) => {
 .article-container {
   width: min(1120px, calc(100% - 32px));
   margin: 0 auto;
+
+  .title{
+    display: flex; 
+    gap: 2rem;
+  }
 }
 
 /* Hero usa a capa como fundo e overlay para garantir leitura do titulo. */
@@ -154,7 +159,7 @@ const formatDate = (value: string) => {
   position: relative;
   display: flex;
   align-items: end;
-  padding: 7rem 0 5rem;
+  padding: 9rem 0 5rem;
   overflow: hidden;
   background-position: center;
   background-size: cover;
@@ -210,7 +215,7 @@ const formatDate = (value: string) => {
 
 .article-hero__description {
   max-width: 760px;
-  margin: 24px 0 0;
+  margin: 0;
   color: rgba(255, 255, 255, 0.84);
   font-size: 1.22rem;
   line-height: 1.65;
@@ -248,7 +253,7 @@ const formatDate = (value: string) => {
   color: style.$primary;
   font-size: 0.82rem;
   font-weight: 900;
-  background: style.$yellow;
+  background: style.$alt-fourth;
   border-radius: 999px;
 }
 
@@ -259,7 +264,8 @@ const formatDate = (value: string) => {
 
 .article-shell {
   display: grid;
-  grid-template-columns: 260px minmax(0, 1fr);
+  // grid-template-columns: 260px minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr);
   align-items: start;
   gap: 44px;
 }
@@ -480,6 +486,10 @@ const formatDate = (value: string) => {
 
   .article-aside__date {
     margin-bottom: 0;
+  }
+
+  .title{
+    flex-direction: column;
   }
 }
 
