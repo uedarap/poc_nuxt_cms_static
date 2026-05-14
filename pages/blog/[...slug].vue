@@ -372,6 +372,8 @@ const formatDate = (value: string) => {
 /* Centraliza o paragrafo que o Markdown cria automaticamente ao redor de imagens. */
 .article-body :deep(p:has(img)) {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
 }
 
