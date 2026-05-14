@@ -4,7 +4,7 @@ const repositoryName = "poc_nuxt_cms_static";
 const baseURL = process.env.NUXT_APP_BASE_URL || "/";
 const siteUrl =
     process.env.NUXT_PUBLIC_SITE_URL ||
-    `https://example.github.io/${repositoryName}`;
+    `https://www.iportsolutions.com.br/${repositoryName}`;
 
 export default defineNuxtConfig({
     srcDir: ".",
@@ -126,18 +126,11 @@ export default defineNuxtConfig({
         "~/assets/css/style.css",
         "~/assets/css/responsive.css",
     ],
-    // nitro: {
-    //   preset: 'github_pages',
-    //   prerender: {
-    //     crawlLinks: true,
-    //     routes: ['/', '/blog']
-    //   }
-    // },
-    // routeRules: {
-    //   '/': { prerender: true },
-    //   '/blog': { prerender: true },
-    //   '/blog/**': { prerender: true }
-    // },
+    routeRules: {
+        // Garante que arquivos tecnicos de SEO sejam emitidos no build estatico do GitHub Pages.
+        "/robots.txt": { prerender: true },
+        "/sitemap.xml": { prerender: true },
+    },
     typescript: {
         strict: true,
     },

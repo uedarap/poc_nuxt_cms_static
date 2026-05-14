@@ -588,9 +588,9 @@ const ogImage = `${siteUrl}${baseUrl}images/blog-cover-static-site.svg`
 
 useSeoMeta({
   title: 'iPORT Solutions',
-  description: 'Base moderna para blog estático com Nuxt 4, Nuxt Content, GitHub Pages e Pages CMS.',
-  ogTitle: 'POC Blog estático com Nuxt Content',
-  ogDescription: 'Markdown versionado em Git, build estático e edição via Pages CMS.',
+  description: 'Solução completa para gestão portuaria.',
+  ogTitle: 'iPORT Solutions',
+  ogDescription: 'Solução completa para gestão portuaria.',
   ogType: 'website',
   ogImage,
   twitterCard: 'summary_large_image'
