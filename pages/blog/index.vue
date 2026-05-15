@@ -21,6 +21,8 @@ type BlogContentPost = {
    draft?: boolean
 }
 
+const publicAsset = usePublicAsset()
+
 const headerMenuItems = [
    //  { type: 'section' as const, label: 'Sobre', id: 'sobre', offset: 0 },
     { type: 'route' as const, label: 'Home', to: '/' },
@@ -29,7 +31,7 @@ const headerMenuItems = [
         label: 'Itau Cubo',
         href: 'https://cubo.network/pt/comunidade-startups/iport',
         target: '_blank',
-        image: './images/cubo.svg',
+        image: publicAsset('/images/cubo.svg'),
         imageAlt: 'Itau Cubo',
     },
 ];
@@ -80,7 +82,7 @@ const blogPosts = computed<BlogPost[]>(() => {
       description: post.description || '',
       date: formatPostDate(post.date),
       tags: post.tags || [],
-      image: post.cover || './images/bg_iport_video.png',
+      image: publicAsset(post.cover || '/images/bg_iport_video.png'),
       link: post.path,
       isFeatured: isFeaturedMarkdown(post)
    }))
@@ -194,7 +196,7 @@ useSeoMeta({
    ogDescription:
       'Conteudos sobre tecnologia, automacao portuaria, logistica e transformacao digital.',
    ogType: 'website',
-   ogImage: './images/bg_iport_video.png',
+   ogImage: publicAsset('/images/bg_iport_video.png'),
    twitterCard: 'summary_large_image'
 })
 </script>
@@ -206,7 +208,7 @@ useSeoMeta({
 
       <main>
          <!-- Hero editorial com imagem portuaria e overlay azul para conectar com a identidade da landing. -->
-         <section class="blog-hero">
+         <section class="blog-hero" :style="{ backgroundImage: `url(${publicAsset('/images/iport-view.png')})` }">
             <div class="blog-hero__overlay"></div>
 
             <div class="blog-hero__content">
@@ -456,7 +458,6 @@ useSeoMeta({
    min-height: 620px;
    padding: 200px 0 200px;
    overflow: hidden;
-   background-image: url('./images/iport-view.png');
    background-position: center 75%;
    background-size: cover;
 }

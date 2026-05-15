@@ -4,7 +4,8 @@ media:
   - name: images
     label: Imagens
     input: public/blog/images
-    output: /images
+    # As midias ficam em public/blog/images, entao o caminho publico precisa preservar /blog/images.
+    output: /blog/images
     categories: [image]
     extensions: [png, jpg, jpeg, webp, svg]
     rename: safe

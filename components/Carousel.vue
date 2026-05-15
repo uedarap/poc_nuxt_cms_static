@@ -6,10 +6,10 @@
                 :class="{ 'selected': selectedSlide === index }">
                 <div class="swiper-slide-in" :class="{ 'selected': selectedSlide === index }">
                     <div class="slide-bg" :class="{ selected: selectedSlide === index }">
-                        <img :src="`/images/${slide.photo}`" :alt="slide.title" />
+                        <img :src="publicAsset(`/images/${slide.photo}`)" :alt="slide.title" />
                     </div>
                     <div class="touch" :style="{ display: selectedSlide === index ? 'none' : 'block' }">
-                        <img src="/images/touch.svg" alt="">
+                        <img :src="publicAsset('/images/touch.svg')" alt="">
                     </div>
                     <transition name="fade" mode="out-in">
                         <div key="1" v-if="selectedSlide === index" class="slide-details">
@@ -18,7 +18,7 @@
                         </div>
                         <div key="2" v-else class="slide-title">
                             <h4 v-html="slide.title"></h4>
-                            <div class="img-logo"><img :src="`/images/${slide.logo}`"  alt=""></div>
+                            <div class="img-logo"><img :src="publicAsset(`/images/${slide.logo}`)"  alt=""></div>
                         </div>
                     </transition>
                 </div>
@@ -49,6 +49,8 @@ export default {
 
     setup(props, { expose }) {
         const selectedSlide = ref(null);
+        // Resolve imagens de public/ com o prefixo correto quando o deploy usa subpasta no GitHub Pages.
+        const publicAsset = usePublicAsset();
         const length = ref(3); // Ref para armazenar dinamicamente o número de slides visíveis
 
         function toggleSlide(index) {
@@ -90,6 +92,7 @@ export default {
             toggleSlide,
             closeSlide,
             breakpoints,
+            publicAsset,
             modules: [FreeMode, Pagination],
         };
     },

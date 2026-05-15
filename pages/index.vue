@@ -5,7 +5,7 @@
         <div class="hero_bg_box">
             <div class="bg_img_box" style="position: relative; overflow: hidden; width: 100%; height: 100%;">
                 <!-- Placeholder para a imagem -->
-                <img src="./images/bg_iport_video.png" alt="background" class="placeholder-image"
+                <img :src="publicAsset('/images/bg_iport_video.png')" alt="background" class="placeholder-image"
                     style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;">
 
                 <!-- Vídeo do Vimeo -->
@@ -173,7 +173,7 @@
                         <div class="grid-tos">
                             <div v-for="module in filteredModules" :key="module.id" :class="['module', { selected: selectedTOS === module.name }]" @click="selectedTOS = module.name">
                                 <h3 v-html="module.title"></h3>
-                                <img :src="`./images/icons_tos/${module.name.toLowerCase()}.svg`" :alt="module.name"
+                                <img :src="publicAsset(`/images/icons_tos/${module.name.toLowerCase()}.svg`)" :alt="module.name"
                                     :style="
                                         (module.name.toLowerCase() === 'ipuc') ||
                                         (module.name.toLowerCase() === 'icarga') ||
@@ -184,17 +184,17 @@
 
                         <div id="isos">
                             <div class="iso col-6" style="display: flex;">
-                                <img src="./images/iso27001.png" alt="ISO27001" style="width: 100%;"
+                                <img :src="publicAsset('/images/iso27001.png')" alt="ISO27001" style="width: 100%;"
                                     class="col-4 col-lg-4">
-                                <img src="./images/iso28000.png" alt="ISO28000" style="width: 100%;"
+                                <img :src="publicAsset('/images/iso28000.png')" alt="ISO28000" style="width: 100%;"
                                     class="col-4 col-lg-4">
-                                <img src="./images/iso31000.png" alt="ISO31000" style="width: 100%;"
+                                <img :src="publicAsset('/images/iso31000.png')" alt="ISO31000" style="width: 100%;"
                                     class="col-4 col-lg-4">
                             </div>
                             <div class="iso col-6" style="display: flex; align-items: center;">
-                                <img src="./images/aeo.png" alt="AEO" class="col-6 col-lg-6"
+                                <img :src="publicAsset('/images/aeo.png')" alt="AEO" class="col-6 col-lg-6"
                                     style="height: 60%;">
-                                <img src="./images/microsoft_hub_nobg.png" alt="" class="col-6 col-lg-6"
+                                <img :src="publicAsset('/images/microsoft_hub_nobg.png')" alt="" class="col-6 col-lg-6"
                                     style="width: 100%;">
                             </div>
                         </div>
@@ -361,7 +361,10 @@
     <!-- #endregion about section -->
 
     <!-- why section -->
-    <section class="why-section layout_padding partner-section" style="padding-top: 7rem;;">
+    <section
+        class="why-section layout_padding partner-section"
+        :style="{ backgroundImage: `url(${publicAsset('/images/minimalist_boat_2.png')})`, paddingTop: '7rem' }"
+    >
         <div class="container" style="margin-bottom: 40px;">
             <div class="heading_container heading_center">
                 <h2>
@@ -407,7 +410,7 @@
                     <div class="col-lg-2 col-md-6 col-6">
                         <div class="box ">
                             <div class="img-box">
-                                <img src="./images/jose.jpg" class="img1" alt="">
+                                <img :src="publicAsset('/images/jose.jpg')" class="img1" alt="">
                             </div>
                             <div class="detail-box">
                                 <h5>
@@ -439,7 +442,7 @@
                     <div class="col-lg-2 col-md-6 col-6">
                         <div class="box ">
                             <div class="img-box">
-                                <img src="./images/alex.jpg" class="img1" alt="">
+                                <img :src="publicAsset('/images/alex.jpg')" class="img1" alt="">
                             </div>
                             <div class="detail-box">
                                 <h5>
@@ -459,7 +462,7 @@
                     <div class="col-lg-2 col-md-6 col-6">
                         <div class="box ">
                             <div class="img-box">
-                                <img src="./images/lucia.jpg" class="img1" alt="">
+                                <img :src="publicAsset('/images/lucia.jpg')" class="img1" alt="">
                             </div>
                             <div class="detail-box">
                                 <h5>
@@ -480,7 +483,7 @@
                     <div class="col-lg-2 col-md-6 col-6">
                         <div class="box ">
                             <div class="img-box">
-                                <img src="./images/vander.jpg" class="img1" alt="">
+                                <img :src="publicAsset('/images/vander.jpg')" class="img1" alt="">
                             </div>
                             <div class="detail-box">
                                 <h5>
@@ -500,7 +503,7 @@
                     <div class="col-lg-2 col-md-6 col-6">
                         <div class="box ">
                             <div class="img-box">
-                                <img src="./images/russo.jpg" class="img1" alt="">
+                                <img :src="publicAsset('/images/russo.jpg')" class="img1" alt="">
                             </div>
                             <div class="detail-box">
                                 <h5>
@@ -579,12 +582,14 @@ import LandingHeader from '@/components/LandingHeader.vue';
 import linkedinPosts from "@/assets/linkedin_posts.json";
 import modulesJson from "@/assets/modules.json";
 import { computed, nextTick, onMounted, onUnmounted, ref } from 'vue';
+import { usePublicAsset } from '~/composables/usePublicAsset';
 
 const config = useRuntimeConfig()
 const baseUrl = config.app.baseURL
 const siteUrl = config.public.siteUrl.replace(/\/$/, '')
 const canonicalUrl = `${siteUrl}${baseUrl === '/' ? '' : baseUrl.slice(0, -1)}/`
 const ogImage = `${siteUrl}${baseUrl}images/blog-cover-static-site.svg`
+const publicAsset = usePublicAsset()
 
 useSeoMeta({
   title: 'iPORT Solutions',
@@ -626,7 +631,7 @@ const headerMenuItems = [
         label: 'Itau Cubo',
         href: 'https://cubo.network/pt/comunidade-startups/iport',
         target: '_blank',
-        image: './images/cubo.svg',
+        image: publicAsset('/images/cubo.svg'),
         imageAlt: 'Itau Cubo',
     },
 ];
@@ -1279,7 +1284,6 @@ body {
     }
 
     .why-section{
-        background: url('./images/minimalist_boat_2.png');
         background-size:     cover;
         background-repeat:   no-repeat;
         background-position: left center;

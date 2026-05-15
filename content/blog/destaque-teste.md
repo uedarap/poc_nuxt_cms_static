@@ -2,7 +2,7 @@
 title: Destaque Teste
 description: Destaque Teste
 date: 2026-05-15
-cover: /images/minimalistboat.png
+cover: /blog/images/minimalistboat.png
 draft: false
 slug: Teste Teset 2
 ---
@@ -14,9 +14,7 @@ slug: Teste Teset 2
 
 
 
-![](/images/blog-cover-static-site.svg)
+![](/blog/images/blog-cover-static-site.svg)
 
-![](/images/fundo.png)
-
-![](/images/truckerjpg.png)
+![](/blog/images/truckerjpg.png)
 

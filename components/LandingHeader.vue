@@ -40,6 +40,7 @@ const props = withDefaults(
 const route = useRoute()
 const isScrolled = ref(false)
 const activeSection = ref('')
+const publicAsset = usePublicAsset()
 
 // Calcula internamente se o header esta compacto e qual item de secao deve ficar ativo.
 const handleScrollState = () => {
@@ -98,7 +99,7 @@ onUnmounted(() => {
         <div class="container-fluid">
             <nav class="navbar navbar-expand-lg custom_nav-container">
                 <NuxtLink class="navbar-brand" to="/" aria-label="Ir para a pagina inicial">
-                    <img :src="logoSrc" :alt="logoAlt" />
+                    <img :src="publicAsset(logoSrc)" :alt="logoAlt" />
                 </NuxtLink>
 
                 <button
@@ -145,7 +146,7 @@ onUnmounted(() => {
                                     v-if="item.image"
                                     class="cubo"
                                     :class="{ scrolled: isScrolled }"
-                                    :src="item.image"
+                                    :src="publicAsset(item.image)"
                                     :alt="item.imageAlt || item.label"
                                 />
                                 <span v-else>{{ item.label }}</span>

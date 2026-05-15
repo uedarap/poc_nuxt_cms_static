@@ -102,7 +102,7 @@
                     <!-- Imagem clicavel leva para a unidade principal no Google Maps. -->
                     <div class="map-img my-3 mt-4">
                         <a href="https://maps.app.goo.gl/hscK6XAj6p9vEoXr7" target="_blank" rel="noopener">
-                            <img src="/images/map.png" alt="Mapa com localizacao da iPORT">
+                            <img :src="publicAsset('/images/map.png')" alt="Mapa com localizacao da iPORT">
                         </a>
                     </div>
                 </div>
@@ -130,6 +130,11 @@
         </div>
     </section>
 </template>
+
+<script setup lang="ts">
+// Resolve o mapa em public/ com o baseURL correto no GitHub Pages.
+const publicAsset = usePublicAsset()
+</script>
 
 <style lang="scss" scoped>
 @use '@/style.scss' as style;

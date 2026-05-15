@@ -10,6 +10,8 @@
 
 
 <script setup>
+const publicAsset = usePublicAsset()
+
 const empresas = [
   'brado',
   'clia_emporio',
@@ -48,7 +50,7 @@ const empresas = [
 // Criei essa função pra que quando tivermos uma build de produção, o caminho das imagens seja diferente do ambiente de desenvolvimento
 // Isso ocorre pq quando usamos ":src" em um componente Vue, o Vite não consegue resolver o caminho relativo corretamente
 function getImagePath(nome) {
-  return `/images/clients_iport/${nome}.png`;
+  return publicAsset(`/images/clients_iport/${nome}.png`);
 }
 
 </script>
