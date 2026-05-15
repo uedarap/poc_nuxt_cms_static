@@ -3,6 +3,9 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
+      # Publica quando houver push na branch atual do repositorio.
+      - master
+      # Mantem compatibilidade caso o repositorio seja renomeado para main depois.
       - main
   workflow_dispatch:
 
