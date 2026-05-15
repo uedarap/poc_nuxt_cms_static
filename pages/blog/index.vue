@@ -29,7 +29,7 @@ const headerMenuItems = [
         label: 'Itau Cubo',
         href: 'https://cubo.network/pt/comunidade-startups/iport',
         target: '_blank',
-        image: '/images/cubo.svg',
+        image: './images/cubo.svg',
         imageAlt: 'Itau Cubo',
     },
 ];
@@ -80,7 +80,7 @@ const blogPosts = computed<BlogPost[]>(() => {
       description: post.description || '',
       date: formatPostDate(post.date),
       tags: post.tags || [],
-      image: post.cover || '/images/bg_iport_video.png',
+      image: post.cover || './images/bg_iport_video.png',
       link: post.path,
       isFeatured: isFeaturedMarkdown(post)
    }))
@@ -194,7 +194,7 @@ useSeoMeta({
    ogDescription:
       'Conteudos sobre tecnologia, automacao portuaria, logistica e transformacao digital.',
    ogType: 'website',
-   ogImage: '/images/bg_iport_video.png',
+   ogImage: './images/bg_iport_video.png',
    twitterCard: 'summary_large_image'
 })
 </script>
@@ -456,7 +456,7 @@ useSeoMeta({
    min-height: 620px;
    padding: 200px 0 200px;
    overflow: hidden;
-   background-image: url('/images/iport-view.png');
+   background-image: url('./images/iport-view.png');
    background-position: center 75%;
    background-size: cover;
 }

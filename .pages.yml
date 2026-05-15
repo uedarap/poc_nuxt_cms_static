@@ -59,6 +59,6 @@ content:
         options:
           format: markdown
           media: images
-          path: public/images
+          path: public/blog/images
           rename: safe
           switcher: true

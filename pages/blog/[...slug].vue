@@ -15,7 +15,7 @@ const headerMenuItems = [
     label: 'Itau Cubo',
     href: 'https://cubo.network/pt/comunidade-startups/iport',
     target: '_blank',
-    image: '/images/cubo.svg',
+    image: './images/cubo.svg',
     imageAlt: 'Itau Cubo',
   },
 ]
@@ -35,7 +35,7 @@ if (!post.value) {
 // Monta URLs absolutas para canonical e preview social respeitando o baseURL do deploy.
 const canonicalUrl = computed(() => `${siteUrl}${baseUrl === '/' ? '' : baseUrl.slice(0, -1)}${path}`)
 const ogImage = computed(() => post.value?.cover ? `${siteUrl}${baseUrl}${post.value.cover.replace(/^\//, '')}` : undefined)
-const coverImage = computed(() => post.value?.cover || '/images/bg_iport_video.png')
+const coverImage = computed(() => post.value?.cover || './images/bg_iport_video.png')
 
 useSeoMeta({
   title: () => {return 'iPORT / Blog - ' + post.value?.title},
@@ -123,7 +123,7 @@ const formatDate = (value: string) => {
     <!-- Footer institucional replica o fechamento da listagem do blog. -->
     <!-- <footer class="article-footer">
       <div class="article-container article-footer__inner">
-        <img src="/images/iport_logo_mono_nobg2.png" alt="iPORT Solutions">
+        <img src="./images/iport_logo_mono_nobg2.png" alt="iPORT Solutions">
 
         <div class="article-footer__links">
           <NuxtLink to="/">Home</NuxtLink>
