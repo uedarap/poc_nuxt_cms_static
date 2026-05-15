@@ -124,6 +124,8 @@ Conteúdo do post em Markdown.
 
 Posts com `draft: true` não aparecem na listagem pública nem na página de detalhe.
 
+Ou da uma olhada em [Criar post blog](./markdown/criacao-posts-blog.md)
+
 ## Usar Pages CMS
 
 O arquivo `.pages.yml` configura uma coleção `Blog` apontando para `content/blog`.

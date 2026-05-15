@@ -1,7 +1,9 @@
+# Arquivo de configuração referente ao Pages CMS: https://app.pagescms.org/
+
 media:
   - name: images
     label: Imagens
-    input: public/images
+    input: public/blog/images
     output: /images
     categories: [image]
     extensions: [png, jpg, jpeg, webp, svg]
