@@ -5,8 +5,27 @@ on:
     branches:
       # Publica quando houver push na branch atual do repositorio.
       - master
-      # Mantem compatibilidade caso o repositorio seja renomeado para main depois.
-      - main
+    paths:
+      # Posts publicados pelo Pages CMS disparam o deploy final, ja com as imagens commitadas antes.
+      - content/blog/**/*.md
+      # Mudancas no app continuam publicando normalmente.
+      - app.vue
+      - assets/**
+      - components/**
+      - composables/**
+      - content.config.ts
+      - nuxt.config.ts
+      - pages/**
+      - public/**
+      - server/**
+      - utils/**
+      - package.json
+      - package-lock.json
+      - .pages.yml
+      - .github/workflows/deploy.yml
+      # Commits isolados de upload de midia do Pages CMS nao disparam deploy.
+      - "!public/blog/images/**"
+  # Isso habilita deploy manual pelo GitHub: Actions / Deploy to GitHub Pages / Run workflow...
   workflow_dispatch:
 
 permissions:
